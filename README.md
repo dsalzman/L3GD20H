@@ -5,10 +5,9 @@ This project connects the L3GD20H and the ADXL355 to the Beaglebone Black.
 
 The progam running on the BBB calculates the pitch and roll of the breadboard using data from both sensors combined with a complimentary filter. This data is sent over UART to an Arduino Pro Mini and displayed on a LCD characted display.
 
-Before running this progam the devices overlays for UART, SPI, and I2C must be loaded on the BBB.
+Before running this progam the devices overlays for UART and SPI must be loaded on the BBB.(I2C2 is loaded by defualt)
 * 'echo BB-UART4 > /sys/devices.bone/capemgr.8/slots' or $SLOTS
 * 'echo ADAFRUIT_SPI0 > /sys/devices/bone_capemgr.8/slots'
-* 'echo BB-I2C1 > /sys/devices/bone_capemgr.8/slots;
 
 ##Connections:
 
