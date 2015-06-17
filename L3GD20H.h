@@ -1,9 +1,7 @@
 /*
- * L3GD20H.h  Created on: 17 May 2014
- * Copyright (c) 2014 Derek Molloy (www.derekmolloy.ie)
- * Made available for the book "Exploring BeagleBone"
- * See: www.exploringbeaglebone.com
- * Licensed under the EUPL V.1.1
+ * Author: Danny Salzman
+ * This is demonstration code
+ * Date: 6/17/2105
  *
  * This Software is provided to You under the terms of the European
  * Union Public License (the "EUPL") version 1.1 as published by the

@@ -1,3 +1,7 @@
+ /* Author: Danny Salzman
+ * This is demonstration code
+ * Date: 6/17/2105
+/*
 
 #ifndef LIBRARIES_UARTDEVICE_H_
 #define LIBRARIES_UARTDEVICE_H_

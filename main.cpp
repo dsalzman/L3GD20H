@@ -1,10 +1,7 @@
 /*
- * main.cpp
- *
- *  Created on: Jun 13, 2015
- *      Author: danny
- */
-/*
+ * Author: Danny Salzman
+ * This is demonstration code
+ * Date: 6/17/2105
  *
  * This Software is provided to You under the terms of the European
  * Union Public License (the "EUPL") version 1.1 as published by the
