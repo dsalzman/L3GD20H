@@ -5,11 +5,6 @@
  *      Author: danny
  */
 /*
- * EBBGPIO.cpp  Created on: 29 Apr 2014
- * Copyright (c) 2014 Derek Molloy (www.derekmolloy.ie)
- * Made available for the book "Exploring BeagleBone"
- * See: www.exploringbeaglebone.com
- * Licensed under the EUPL V.1.1
  *
  * This Software is provided to You under the terms of the European
  * Union Public License (the "EUPL") version 1.1 as published by the
