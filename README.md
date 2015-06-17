@@ -11,7 +11,7 @@ Before running this progam the devices overlays for UART and SPI must be loaded 
 
 ##Video Demonstration
 [![Video](https://i.vimeocdn.com/video/523001019.jpg?mw=960&amp;mh=540)](https://vimeo.com/130947497)
-
+Click image to link to video
 
 ##Connections:
 
