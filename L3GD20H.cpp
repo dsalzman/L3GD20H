@@ -48,59 +48,22 @@ short L3GD20H::combineRegisters(unsigned char msb, unsigned char lsb){
    return ((short)msb<<8)|(short)lsb;
 }
 
-/**
- * Method to calculate the pitch and roll state values. This calculation takes account of the scaling
- * factors due to the resolution and gravity range to determine gravity weighted values that are used
- * to calculate the angular pitch and roll values in degrees.
- */
-//void L3GD20H::calculatePitchAndRoll(){
-//	float gravity_range;
-////	switch(L3GD20H::range){
-////		case L3GD20H::PLUSMINUS_16_G: gravity_range=32.0f; break;
-////		case L3GD20H::PLUSMINUS_8_G: gravity_range=16.0f; break;
-////		case L3GD20H::PLUSMINUS_4_G: gravity_range=8.0f; break;
-////		default: gravity_range=4.0f; break;
-////	}
-//    float resolution = 1024.0f;
-//    ///if (this->resolution==L3GD20H::HIGH) resolution = 8192.0f; //13-bit resolution
-//    float factor = gravity_range/resolution;
-//
-//    float accXg = this->accelerationX * factor;
-//    float accYg = this->accelerationY * factor;
-//    float accZg = this->accelerationZ * factor;
-//	float accXSquared = accXg * accXg ;
-//	float accYSquared = accYg * accYg ;
-//	float accZSquared = accZg * accZg ;
-//	this->pitch = 180 * atan(accXg/sqrt(accYSquared + accZSquared))/M_PI;
-//	this->roll = 180 * atan(accYg/sqrt(accXSquared + accZSquared))/M_PI;
-//}
 
 /**
- * Method used to update the DATA_FORMAT register and any other registers that might be added
- * in the future.
- * @return 0 if the register is updated successfully
- */
-//int L3GD20H::updateRegisters(){
-   //update the DATA_FORMAT register
- //  char data_format = 0x00;  //+/- 2g with normal resolution
-   //Full_resolution is the 3rd LSB
- //  data_format = data_format|((this->resolution)<<3);
-   //data_format = data_format|this->range; // 1st and 2nd LSB therefore no shift
- //  return this->writeRegister(DATA_FORMAT, data_format);
-//}
-
-/**
- * The constructor for the L3GD20H accelerometer object. It passes the bus number and the
+ * The constructor for the L3GD20H gyroscope object. It passes the bus number and the
  * device address (with is 0x6b by default) to the constructor of I2CDevice. All of the states
  * are initialized and the registers are updated.
  * @param I2CBus The bus number that the L3GD20H device is on - typically 0 or 1
  * @param I2CAddress The address of the L3GD20H device (default 0x6b, but can be altered)
  */
 L3GD20H::L3GD20H(unsigned int I2CBus, unsigned int I2CAddress):
-	I2CDevice(I2CBus, I2CAddress){   // this member initialisation list calls the parent constructor
+	I2CDevice(I2CBus, I2CAddress){   // this member initialization list calls the parent constructor
 	this->I2CAddress = I2CAddress;
 	this->I2CBus = I2CBus;
+	//Initializations
+	//Power on device and enable all three axis
 	this->writeRegister(CTRL1, 0x0F);
+	//Set Control [2,3,4,5] Registers to Default state
 	this->writeRegister(CTRL2, 0x00);
 	this->writeRegister(CTRL3, 0x00);
 	this->writeRegister(CTRL4, 0x00);

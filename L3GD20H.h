@@ -216,7 +216,7 @@ namespace exploringBB {
  * Low_ODR - Low Speed ODR (0: Low Speed ODR Disabled, 1: Low Speed ODR Enabled)
  * Bits 1 and 4 need to be set to 0 for device to work
  */
-#define LOW_ODR	       0x39
+#define LOW_ODR	                  0x39
 
 #define L3GD20H_ODR_BIT           7
 #define L3GD20H_ODR_LENGTH        2
@@ -227,10 +227,10 @@ namespace exploringBB {
 #define L3GD20H_YEN_BIT           1
 #define L3GD20H_XEN_BIT           0
 
-#define L3GD20H_RATE_100_12          0b00 //selection of high vs low rate is via Low_ODR
-#define L3GD20H_RATE_200_25          0b01 //selection of high vs low rate is via Low_ODR
-#define L3GD20H_RATE_400_50          0b10 //selection of high vs low rate is via Low_ODR
-#define L3GD20H_RATE_800_50          0b11 //selection of high vs low rate is via Low_ODR
+#define L3GD20H_RATE_100_12       0b00 //selection of high vs low rate is via Low_ODR
+#define L3GD20H_RATE_200_25       0b01 //selection of high vs low rate is via Low_ODR
+#define L3GD20H_RATE_400_50       0b10 //selection of high vs low rate is via Low_ODR
+#define L3GD20H_RATE_800_50       0b11 //selection of high vs low rate is via Low_ODR
 
 #define L3GD20H_BW_LOW            0b00
 #define L3GD20H_BW_MED_LOW        0b01

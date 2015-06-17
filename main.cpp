@@ -48,79 +48,85 @@
 #define RAD_TO_DEG 57.29578
 #define M_PI 3.14159265358979323846
 
+//Variables
+short accX = 0;
+short accY = 0;
+short accZ = 0;
+
+short gyroX = 0;
+short gyroY = 0;
+short gyroZ = 0;
+
+float rate_gyr_y = 0.0;    // [deg/s]
+float rate_gyr_x = 0.0;    // [deg/s]
+float rate_gyr_z = 0.0;    // [deg/s]
+
+float gyroXangle = 0.0;
+float gyroYangle = 0.0;
+float gyroZangle = 0.0;
+
+float AccYangle = 0.0;
+float AccXangle = 0.0;
+float CFangleX = 0.0;
+float CFangleY = 0.0;
+int timer = 0;
+
+const float ROLL_OFFSET = -0.8;
+const float PITCH_OFFSET = -1.4;
+
+unsigned char buffer[6];
+
 using namespace std;
 using namespace exploringBB;
 
 int main() {
 
-	cout << "Starting EBB ADXL345 SPI Test" << endl;
    SPIDevice *busDevice = new SPIDevice(1,0); // Using second SPI bus (both loaded)
    busDevice->setSpeed(1000000);              // Have access to SPI Device object
    ADXL345 acc(busDevice);
 
-     UartDevice uart4(54);
-   	uart4.openSerial();
-   	//uart4.writeFloat(3.114);
+   //Create Gyroscope Object and set range to 2000 degrees per second
+   L3GD20H gyro(1,0x6b);
+   gyro.setRange(L3GD20H::DPS_2000);
 
-
-   L3GD20H sensor(1,0x6b);
-   sensor.setRange(L3GD20H::DPS_2000);
-
-   short accX = 0;
-   short accY = 0;
-   short accZ = 0;
-
-   short gyroX = 0;
-   short gyroY = 0;
-   short gyroZ = 0;
-
-   float rate_gyr_y = 0.0;   // [deg/s]
-   float rate_gyr_x = 0.0;    // [deg/s]
-   float rate_gyr_z = 0.0;     // [deg/s]
-
-   float gyroXangle = 0.0;
-   float gyroYangle = 0.0;
-   float gyroZangle = 0.0;
-
-   float AccYangle = 0.0;
-   float AccXangle = 0.0;
-   float CFangleX = 0.0;
-   float CFangleY = 0.0;
-   int timer = 0;
-
-   const float ROLL_OFFSET = -0.8;
-   const float PITCH_OFFSET = -1.4;
-
-   unsigned char buffer[6];
+   //Open serial object on
+   UartDevice uart4(54);
+   uart4.openSerial();
 
    while(1){
 
+	   //Read in raw sensor data
 	   acc.readSensorState();
 	   accX = acc.getAccelerationX();
 	   accY = acc.getAccelerationY();
 	   accZ = acc.getAccelerationZ();
 
-	   sensor.readSensorState();
-	   gyroX = sensor.getGyroX();
-	   gyroY = sensor.getGyroY();
-	   gyroZ = sensor.getGyroZ();
+	   gyro.readSensorState();
+	   gyroX = gyro.getGyroX();
+	   gyroY = gyro.getGyroY();
+	   gyroZ = gyro.getGyroZ();
 
 
-
+	   // Convert gyro raw data to DPS using DPS 2000 constant
 	   rate_gyr_x = (float) gyroX * 0.07;
 	   rate_gyr_y = (float) gyroY * 0.07;
 	   rate_gyr_z = (float) gyroZ * 0.07;
 
+	   //Calculate angles from gyroscope using dt of 20 ms
 	   gyroXangle = rate_gyr_x * 0.02;
 	   gyroYangle = rate_gyr_y * 0.02;
 	   gyroZangle = rate_gyr_z * 0.02;
 
+
+	   //Convert Accelerometer values to degress
 	   AccXangle = (float) (atan2(accY, accZ)+M_PI) * RAD_TO_DEG;
 	   AccYangle = (float) (atan2(accZ, accX)+M_PI) * RAD_TO_DEG;
 
+
+	   //Check Orientation
 	   AccXangle -= (float)180.0;
 	   	if (AccYangle > 90)
-	   	        AccYangle -= (float)270;
+	   	    AccYangle -= (float)270;
 	   	else
 	   		AccYangle += (float)90;
 
@@ -130,18 +136,21 @@ int main() {
 	   	CFangleY=(AA*(CFangleY+rate_gyr_y*DT) +(1 - AA) * AccYangle);
 
 
-	  //cout << "Roll: "<< CFangleX + ROLL_OFFSET<< " Pitch: "<< CFangleY +PITCH_OFFSET<< endl;
-
 	   if(timer > 50){
+		   //Clears screen
 		   uart4.writeChar('q');
+		   //Moves to first line
 		   uart4.writeChar('!');
 
+		   //Print Roll Data
 		   uart4.writeString("Roll:    ",8);
 		   uart4.writeFloat(CFangleX+ROLL_OFFSET,4);
+		   //Move cursor to second line
 		   uart4.writeChar('@');
-
+		   //Send roll data to Arduino
 		   uart4.writeString("Pitch:   ",8);
 		   uart4.writeFloat(CFangleY + PITCH_OFFSET,4);
+		   //Move cursor back to first line
 		   uart4.writeChar('!');
 		   timer = 0;
 	   }
