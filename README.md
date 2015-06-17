@@ -1,7 +1,7 @@
 # L3GD20H
-##Sample Project to Demonstrate L3GD20H Gyroscope and ADXL355 Accelerometer
+##Sample Project to Demonstrate L3GD20H Gyroscope and ADXL345 Accelerometer
 
-This project connects the L3GD20H and the ADXL355 to the Beaglebone Black. 
+This project connects the L3GD20H and the ADXL345 to the Beaglebone Black. 
 
 The progam running on the BBB calculates the pitch and roll of the breadboard using data from both sensors combined with a complimentary filter. This data is sent over UART to an Arduino Pro Mini and displayed on a LCD characted display.
 
@@ -29,7 +29,7 @@ Gyroscope Header |  Connect To
 * Vin | BBB P9_3 (VDD_3.3V) 
 
 ###ADXL355 (SPI)
-ADXL355 Header | Connect To
+ADXL345 Header | Connect To
 -------------- | ----------
 * GND | BBB P9_2 (DGND)
 * VCC | BBB P9_4 (VDD_3.3V)
