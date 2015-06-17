@@ -81,6 +81,7 @@ using namespace exploringBB;
 
 int main() {
 
+   // Initialize Accelerometer object over SPI
    SPIDevice *busDevice = new SPIDevice(1,0); // Using second SPI bus (both loaded)
    busDevice->setSpeed(1000000);              // Have access to SPI Device object
    ADXL345 acc(busDevice);
@@ -89,8 +90,8 @@ int main() {
    L3GD20H gyro(1,0x6b);
    gyro.setRange(L3GD20H::DPS_2000);
 
-   //Open serial object on
-   UartDevice uart4(54);
+   //Open serial object on UART 4
+   UartDevice uart4(4);
    uart4.openSerial();
 
    while(1){

@@ -33,11 +33,8 @@
 namespace exploringBB {
 
 /**
- * Constructor for a generic bus device
- * @param bus the bus number
- * @param device the device number
  */
-UartDevice::UartDevice(unsigned char tty) {
+UartDevice::UartDevice(int tty) {
 	this->file=-1;
 	this->tty = tty;
 }
@@ -45,11 +42,13 @@ UartDevice::UartDevice(unsigned char tty) {
 
 int UartDevice::openSerial(){
 
-	 // const char uartPath = "/dev/ttyO";
-	  if ((this->file = open("/dev/ttyO4", O_RDWR | O_NOCTTY | O_NDELAY))<0){
-		  perror("UART: Failed to open the file.\n");
-		  return -1;
-	   }
+
+		if ((this->file = open("/dev/ttyO4", O_RDWR | O_NOCTTY | O_NDELAY))<0){
+				  perror("UART: Failed to open the file.\n");
+				  return -1;
+		}
+
+
 	   struct termios options;               //The termios structure is vital
 	   tcgetattr(this->file, &options);            //Sets the parameters associated with file
 

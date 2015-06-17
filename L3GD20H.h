@@ -35,7 +35,7 @@ namespace exploringBB {
 //Device ID : Default 11010111 (0xd7)
 #define DEVID          0x0F
 /* CTR1 Register Default: 00000111 (0x07)
- * [DR1, DR0, BW1, BW0, PD, Zen, Xen, Yen]
+ * [DR1, DR0, BW1, BW0, PD, Zen, Yen, Xen]
  * DR1-DR0 - Output data rate selection
  * BW1-BW0 - Bandwidth selection
  * PD - Power mode (0 = Power down, 1 = Normal mode, Sleep mode = PD:Zen:Yen:Xen to 1000
