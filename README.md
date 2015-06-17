@@ -9,6 +9,10 @@ Before running this progam the devices overlays for UART and SPI must be loaded 
 * 'echo BB-UART4 > /sys/devices.bone/capemgr.8/slots' or $SLOTS
 * 'echo ADAFRUIT_SPI0 > /sys/devices/bone_capemgr.8/slots'
 
+##Video Demonstration
+[![Video](https://i.vimeocdn.com/video/523001019.jpg?mw=960&amp;mh=540)](https://vimeo.com/130947497)
+
+
 ##Connections:
 
 ###L3GD20H (I2C)   
